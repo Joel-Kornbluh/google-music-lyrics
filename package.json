@@ -1,0 +1,21 @@
+{
+  "name": "google-music-lyrics",
+  "version": "1.0.0",
+  "description": "Add Song Lyrics in Google Music Web App",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google-music-lyrics.git"
+  },
+  "author": "joel-kornbluh",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/google-music-lyrics/issues"
+  },
+  "homepage": "https://github.com/google-music-lyrics",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
