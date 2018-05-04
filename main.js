@@ -3,7 +3,6 @@
 
 (function($){
 	// global refernce to the lyrics DOM container 
-	var $loadTimeout;
 	var $lyricsContainer;
 
 	var GOOGLE_LYRICS_URL_PREFIX = 'https://play.google.com/music/preview/';
@@ -56,13 +55,19 @@
 		}
 		
 		console.log(evt);
-		clearTimeout($loadTimeout);
-		$loadTimeout = setTimeout(showLyrics, 1000);
+		setTimeout(showLyrics, 400);
 	}
 
 	function showLyrics(){
-		var url = buildLyricsUrl(getCurrentId());
-		!!url && ensureLyricsContainer().load(url + ' ' + GOOGLE_LYRICS_CONTAINER_CSS_SELECTOR);
+		var currentSongId = getCurrentId();
+		
+		// if we can't find the currently playing song or lyrics is already loaded, ignore.
+		if(!currentSongId || (ensureLyricsContainer() && $lyricsContainer.attr('data-song-id') === currentSongId)){
+			return;
+		}
+		
+		var url = buildLyricsUrl(currentSongId);
+		$lyricsContainer.load(url + ' ' + GOOGLE_LYRICS_CONTAINER_CSS_SELECTOR).attr('data-song-id', currentSongId);
 	}
 
 	function hideLyrics(){
