@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	
+	"name": "Google Music Lyrics",
+	"description": "Displays lyrics inside Google Music Player",
+	"version": "1.0.0",
+	"author": "Joel-Kornbluh",
+	"homepage_url": "https://www.google.com",
+
+	"icons": {
+		
+	},
+
+	"content_scripts": [
+		{
+			"matches": ["*://play.google.com/*"],
+			"js": ["content-script.js"]
+		}
+	],
+
+	"permissions": [
+		"tabs",
+		"cookies",
+        "*://play.google.com/"
+	]
+}
