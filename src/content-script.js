@@ -42,7 +42,7 @@ function ensureLyricsContainer(){
 		})
 		$('body').append($lyricsContainer);
 	}
-	
+
 	return $lyricsContainer;
 }
 
@@ -72,12 +72,15 @@ function showLyrics(){
 		.then(response => response.text())
 		.then(reponseText => {
 			var $lyrics = $('<div>').append($.parseHTML(reponseText)).find(GOOGLE_LYRICS_CONTAINER_CSS_SELECTOR);
-			return $lyrics.length ? $lyricsContainer.html($lyrics) : Promise.reject();
-		});
+			return $lyrics.length ? $lyricsContainer.html($lyrics).show() : Promise.reject();
+		})
+		.catch(() =>  hideLyrics(false));
 }
 
 function hideLyrics(){
-	$lyricsContainer.length && $lyricsContainer.remove();
+	if($lyricsContainer){
+		$lyricsContainer.hide();
+	}
 }
 
 function initLyrics(){
