@@ -16,7 +16,7 @@ module.exports = {
 	resolve: {
 		modules: [path.join(rootDir, 'node_modules'), srcDir],
 		alias: {
-			jquery$: 'jquery/dist/jquery.min.js'
+			jquery$: 'jquery/dist/jquery.slim.min.js'
 		},
 	},
 
@@ -62,6 +62,7 @@ module.exports = {
 		// copy over following files
 		new CopyWebpackPlugin([
 			path.join(srcDir, 'manifest.json'),
+
 		]),
 
 		// removes default webpack closure wrappers around each module

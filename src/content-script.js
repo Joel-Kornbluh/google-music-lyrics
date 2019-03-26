@@ -59,13 +59,21 @@ function onAudioEvent(evt){
 function showLyrics(){
 	var currentSongId = getCurrentId();
 	
-	// if we can't find the currently playing song or lyrics is already loaded, ignore.
+	// if we can't find the currently playing song or lyrics is already loading/loaded, ignore.
 	if(!currentSongId || (ensureLyricsContainer() && $lyricsContainer.attr('data-song-id') === currentSongId)){
 		return;
 	}
-	
+
+	$lyricsContainer.attr('data-song-id', currentSongId);
+
 	var url = buildLyricsUrl(currentSongId);
-	$lyricsContainer.load(url + ' ' + GOOGLE_LYRICS_CONTAINER_CSS_SELECTOR).attr('data-song-id', currentSongId);
+
+	return fetch(url)
+		.then(response => response.text())
+		.then(reponseText => {
+			var $lyrics = $('<div>').append($.parseHTML(reponseText)).find(GOOGLE_LYRICS_CONTAINER_CSS_SELECTOR);
+			return $lyrics.length ? $lyricsContainer.html($lyrics) : Promise.reject();
+		});
 }
 
 function hideLyrics(){
